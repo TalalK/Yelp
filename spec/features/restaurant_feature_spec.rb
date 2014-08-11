@@ -12,34 +12,43 @@ describe 'restaurants' do
 
 	context 'restaurants have been added' do
 		before do
-			Restaurant.create(name: 'Maze')
+			Restaurant.create(name: 'Maze', cuisine: 'French/Japanese')
 		end
 
 		it 'should display them' do
 			visit '/restaurants'
 			expect(page).to have_content 'Maze'
 		end
+
+		it 'should display the cuisine' do
+			visit '/restaurants'
+			expect(page).to have_content 'French/Japanese'
+		end
 	end
 
 	context 'Users can add, delete and edit restaurants' do
 
 		before do
-			Restaurant.create(name: 'Maze')
+			Restaurant.create(name: 'Maze', cuisine: 'French/Japanese')	
 		end
 
 		it 'allows the user to add a restaurant' do
 			visit '/restaurants'
 			click_link 'Add a restaurant'
 			fill_in 'Name', with: 'Byron'
+			fill_in 'Cuisine', with: 'American'
 			click_button 'Create Restaurant'
 			expect(page).to have_content 'Byron'
+			expect(page).to have_content 'American'
 		end
 		it 'Allows a user to edit a restaurant' do
 			visit '/restaurants'
 			click_link 'Edit Maze'
 			fill_in 'Name', with: 'Hakkasan'
+			fill_in 'Cuisine', with: 'Chinese'
 			click_button 'Update Restaurant'
 			expect(page).to have_content 'Hakkasan'
+			expect(page).to have_content 'Chinese'
 		end
 		it 'Allows a user to delete a restaurant' do
 			visit '/restaurants'
