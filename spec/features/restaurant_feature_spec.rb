@@ -59,24 +59,6 @@ describe 'restaurants' do
 		end
 	end
 
-	context 'Users have the option to add reviews to their desired restaurants' do
-		
-		before do
-			Restaurant.create(name: 'Maze', cuisine: 'French/Japanese')	
-		end
-
-		it 'Allows a user to add a review' do
-			visit '/restaurants'
-			click_link 'Review Maze'
-			fill_in 'Thoughts', with: "Amazing"
-			select '5', from: "Rating"
-			click_button 'Leave Review'
-			expect(page).to have_content "Amazing"
-			expect(page).to have_content "5"
-		end
-	end
-
-
 end
 
 

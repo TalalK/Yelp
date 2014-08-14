@@ -2,11 +2,17 @@
 	<% @restaurants.each do |restaurant| %>
 	<article class="restaurant">
 	 	<h2> <%= restaurant.name %> </h2>
-	 	<h4> <%= restaurant.cuisine %> </h4>
+	 	<h3> Average Rating: <%= star_rating(restaurant.average_rating) %> </h3>
+	 	<h3> <%= restaurant.cuisine %> </h3>
 
 	 	<ul> 
 	 		<% restaurant.reviews.each do |review| %>
-	 			<li><%= "#{review.thoughts} (#{review.rating})" %> </li>
+	 			<li>
+	 				<%= "#{review.thoughts} (#{star_rating(review.rating)})" %> 
+	 				<button>
+		 				<%= link_to "Delete review for #{restaurant.name}",restaurant_review_path(restaurant, review), method: :delete %>
+	 				</button>
+	 			</li>
  			<% end %>
  		</ul>
 
